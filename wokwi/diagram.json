@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "author": "Adolfo",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-servo", "id": "servo1", "top": -150, "left": 230, "attrs": {} },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "ultra",
+      "top": 170,
+      "left": 230,
+      "attrs": { "distance": "100" }
+    },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd",
+      "top": -176,
+      "left": -330.4,
+      "attrs": { "pins": "i2c" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnAbrir",
+      "top": 40,
+      "left": -250,
+      "attrs": { "color": "green", "label": "ABRIR", "bounce": "0" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnCerrar",
+      "top": 110,
+      "left": -250,
+      "attrs": { "color": "red", "label": "CERRAR", "bounce": "0" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnParar",
+      "top": 180,
+      "left": -250,
+      "attrs": { "color": "yellow", "label": "PARAR", "bounce": "0" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "ledVerde",
+      "top": 260,
+      "left": -120,
+      "attrs": { "color": "limegreen" }
+    },
+    { "type": "wokwi-led", "id": "ledRojo", "top": 260, "left": -60, "attrs": { "color": "red" } },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 340,
+      "left": -140,
+      "rotate": 90,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 340,
+      "left": -80,
+      "rotate": 90,
+      "attrs": { "value": "220" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "servo1:PWM", "esp:18", "orange", [ "h-47.6", "v186.6" ] ],
+    [ "servo1:V+", "esp:5V", "red", [ "h-239.6", "v292.1" ] ],
+    [ "servo1:GND", "esp:GND.2", "black", [ "h-86", "v128.8" ] ],
+    [ "ultra:VCC", "esp:5V", "red", [ "v33.1", "h-296.69" ] ],
+    [ "ultra:TRIG", "esp:5", "blue", [ "v42.7", "h-167.3", "v-192" ] ],
+    [ "ultra:ECHO", "esp:19", "purple", [ "v61.9", "h-158.1", "v-230.4" ] ],
+    [ "ultra:GND", "esp:GND.2", "black", [ "v80.5", "h-158.1", "v-316.2" ] ],
+    [ "lcd:VCC", "esp:5V", "red", [ "h-48", "v-95.9", "h335.6", "v432" ] ],
+    [ "lcd:GND", "esp:GND.1", "black", [ "h-38.4", "v-38.4", "h335.6", "v336" ] ],
+    [ "lcd:SDA", "esp:21", "green", [ "h-19.2", "v-67", "h498.8", "v268.8" ] ],
+    [ "lcd:SCL", "esp:22", "gold", [ "h-28.8", "v-95.7", "h518", "v259.2" ] ],
+    [ "btnAbrir:1.r", "esp:32", "green", [ "h77.4", "v33.4" ] ],
+    [ "btnAbrir:2.r", "esp:GND.1", "black", [ "h67.8", "v81.6" ] ],
+    [ "btnCerrar:1.r", "esp:33", "red", [ "h39", "v-27" ] ],
+    [ "btnCerrar:2.r", "esp:GND.1", "black", [ "h48.6", "v-7.6", "h139.01" ] ],
+    [ "btnParar:1.r", "esp:25", "gold", [ "h19.8", "v-87.4" ] ],
+    [ "btnParar:2.r", "esp:GND.1", "black", [ "h39", "v-58.4" ] ],
+    [ "ledVerde:A", "esp:27", "limegreen", [ "h37.4", "v-177.2" ] ],
+    [ "ledVerde:C", "r1:1", "black", [] ],
+    [ "r1:2", "esp:GND.1", "black", [ "h33.85", "v-221.2" ] ],
+    [ "ledRojo:A", "esp:26", "red", [ "h25.4", "v-186.8" ] ],
+    [ "ledRojo:C", "r2:1", "black", [] ],
+    [ "r2:2", "esp:GND.1", "black", [ "h31.45", "v-221.2" ] ]
+  ],
+  "dependencies": {}
+}

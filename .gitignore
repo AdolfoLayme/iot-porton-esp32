@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env*
+wokwi/config.h
+!wokwi/config.ejemplo.h
+.vercel/
+tareas/logs/
+supabase/.temp/
+recursos/casa-fuentes/

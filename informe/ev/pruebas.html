@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><style>body{overflow:hidden;margin:0;background:#1e1e1e;color:#d4d4d4;font:15px/1.5 'DejaVu Sans Mono',monospace;padding:18px 22px}.c{color:#6a9955}.p{color:#569cd6}.ok{color:#4ec9b0}</style></head><body>
+<div class="p">$ node herramientas/probar-seguridad.mjs</div>
+<pre style="margin:0;font:inherit">  <span class="ok">✓</span> sin sesión: llave negada (403) 1
+  <span class="ok">✓</span> Usuario A recibe llave (vence en 60 min) 2
+  <span class="ok">✓</span> A publica en su propio tema 3
+  <span class="ok">✓</span> A NO puede mandar órdenes como B 4
+  <span class="ok">✓</span> A NO puede hacerse pasar por el portón 5
+  <span class="ok">✓</span> el portón recibió solo la orden legítima, identificando a A 6
+  <span class="ok">✓</span> token inventado: rechazado por el broker 7
+  <span class="ok">✓</span> admin desactiva a B: 2 llave(s) revocada(s) 8
+  <span class="ok">✓</span> B desactivado: llave negada 9
+  <span class="ok">✓</span> la llave vieja de B ya no conecta 10
+  <span class="ok">✓</span> un miembro común no gestiona miembros 11
+  <span class="ok">✓</span> B reactivado: vuelve a recibir llave 12
+
+12/12 pruebas de seguridad OK</pre>
+<div class="p" style="margin-top:10px">$ g++ -std=c++17 -Iwokwi pruebas/reglas_test.cpp &amp;&amp; ./reglas</div>
+<pre style="margin:0;font:inherit">7/7 reglas OK</pre>
+<div class="p" style="margin-top:10px">$ pnpm exec vitest run</div>
+<pre style="margin:0;font:inherit"> Test Files  2 passed (2)
+      Tests  48 passed (48)
+</pre>
+</body></html>

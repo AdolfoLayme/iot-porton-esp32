@@ -1,0 +1,44 @@
+<!doctype html><html lang="es" data-tema="oscuro"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#252423"><link rel="icon" href="/icono.svg"><title>Portón Taller · Maqueta en vivo</title></head>
+<body class="expo">
+<header class="expo-cabecera"><a href="/" class="marca">Portón<span>Taller</span></a>
+  <nav class="expo-nav mono" aria-label="Secciones"><a href="#maqueta">Maqueta</a><a href="#recorrido">Recorrido</a><a href="#casos">¿Qué pasa si?</a><a href="https://wokwi.com/projects/477415305503106049" target="_blank" rel="noopener">Simulación</a><button id="tema" class="discreto">Claro</button></nav>
+</header>
+<section class="heroe" aria-labelledby="titulo-heroe">
+  <div class="heroe-texto">
+    <h1 id="titulo-heroe">La red mueve el mundo físico.</h1>
+    <p class="heroe-bajada">Un ESP32, un broker MQTT y tu celular. Cada orden viaja por internet, el portón decide y todos ven lo mismo al instante.</p>
+    <p id="estado-expo" class="mono estado-expo" role="status">Esperando al portón · sin conexión</p>
+    <div class="mediciones mono"><span>Apertura<strong id="expo-pos">— %</strong></span><span>Sensor<strong id="expo-dist">— cm</strong></span><span>Ida y vuelta<strong id="expo-rtt">— ms</strong></span></div>
+    <div class="heroe-acciones"><a class="boton-linea mono" href="/">Abrir el control ↗</a><a class="boton-linea mono" href="#maqueta">Ver la maqueta ↓</a></div>
+  </div>
+  <svg id="medidor" class="medidor" role="img" aria-label="Medidor de apertura del portón: de 0° cerrado a 90° abierto"></svg>
+</section>
+<main class="expo-principal" id="maqueta">
+  <section class="maqueta" aria-labelledby="titulo-maqueta">
+    <h2 id="titulo-maqueta">La maqueta, en vivo</h2>
+    <canvas id="escena" tabindex="0" aria-label="Maqueta del portón. Esperando telemetría real."></canvas>
+    <div id="respaldo" hidden><p>WebGL no está disponible. Vista superior de respaldo.</p><svg id="respaldo-plano" viewBox="0 0 400 250" role="img" aria-label="Vista superior del portón"></svg></div>
+    <p class="aviso-posicion" id="aviso-posicion" hidden></p>
+    <ul class="leyenda mono">
+      <li><i style="background:#2fd0f0"></i>Sensor HC-SR04 en el poste: vigila el paso del portón</li>
+      <li><i style="background:#3ddc84"></i>Luz verde: portón abierto</li>
+      <li><i style="background:#ff4b4b"></i>Luz roja (parpadea): en movimiento</li>
+      <li>Arrastra para orbitar · pellizca para acercar</li>
+    </ul>
+  </section>
+  <aside class="celular-zona" aria-label="App de control real"><div class="marco-celular"><iframe src="/" title="App real del portón" allow="microphone" id="app-expo"></iframe></div><p class="mono">Misma app · cualquier red</p></aside>
+</main>
+<section class="recorrido" id="recorrido" aria-labelledby="titulo-recorrido"><div class="recorrido-titulo"><h2 id="titulo-recorrido">El viaje de cada orden</h2><span id="paso-texto" class="mono" role="status"></span></div>
+  <svg class="viaje" viewBox="0 0 1000 120" aria-hidden="true">
+    <path id="viaje-ida" class="viaje-linea" d="M100 60 C200 10 400 110 500 60"/><path id="viaje-vuelta" class="viaje-linea" d="M500 60 C600 10 800 110 900 60"/>
+    <circle id="viaje-punto" r="9" cx="0" cy="0" transform="translate(100 60)"/>
+  </svg>
+  <ol id="camino"><li data-paso="0"><strong>Celular</strong><span>publica la orden</span></li><li data-paso="1"><strong>Broker MQTT</strong><span>verifica la llave y distribuye</span></li><li data-paso="2"><strong>ESP32</strong><span>decide y mueve el servo</span></li><li data-paso="3"><strong>Broker MQTT</strong><span>publica el resultado</span></li><li data-paso="4"><strong>Todos</strong><span>reciben el estado</span></li></ol>
+</section>
+<section class="casos" id="casos" aria-labelledby="titulo-casos"><h2 id="titulo-casos">¿Qué pasa si…?</h2><div class="casos-contenido">
+  <details open><summary>Dos personas dan órdenes distintas</summary><p>Abre como Usuario A desde la app. Mientras se mueve, manda la orden contraria como Usuario B desde otro celular: el ESP32 le responde «ocupado» porque el turno es de A. PARAR siempre gana, venga de quien venga.</p><button id="probar-b" disabled>Usuario B: enviar orden contraria</button><p id="resultado-b" class="mono" role="status">Esperando telemetría del portón.</p></details>
+  <details><summary>Algo se cruza mientras cierra (el sensor)</summary><p>El HC-SR04 está en el poste y mide por ultrasonido la distancia a lo que haya en el paso del portón, como la fotocélula de un portón real. Si detecta algo a menos de 20 cm mientras cierra, el ESP32 detiene y reabre el portón, y rechaza cualquier «cerrar» hasta que el paso quede libre. En Wokwi: haz clic en el sensor y baja su distancia.</p><a href="https://wokwi.com/projects/477415305503106049" target="_blank" rel="noopener">Abrir la simulación</a></details>
+  <details><summary>Se pierde la red</summary><p>Detén la simulación o corta su WiFi. El broker avisa la desconexión (LWT) y la app lo detecta por falta de respuesta. Los botones físicos y el sensor siguen funcionando: la seguridad no depende de internet.</p></details>
+</div></section>
+<footer class="expo-pie mono"><span>Simulación ESP32 · Exposición IoT</span><a href="/creditos.txt">Materiales y créditos</a></footer>
+<script type="module" src="/src/demo/inicio.ts"></script></body></html>

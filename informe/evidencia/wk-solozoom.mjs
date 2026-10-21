@@ -1,0 +1,11 @@
+import { abrirPestana } from './wk-lib.mjs';
+const W = await abrirPestana('550B50E73C9B8F8947EDD8DAF0A01603');
+await W.env('Emulation.setDeviceMetricsOverride', { width: 1500, height: 860, deviceScaleFactor: 1, mobile: false });
+await W.env('Page.bringToFront'); await new Promise(r => setTimeout(r, 1000));
+const [dy, pasos] = [Number(process.argv[2]), Number(process.argv[3])];
+const a = JSON.parse(await W.js(`JSON.stringify(document.querySelector('wokwi-lcd1602').getBoundingClientRect())`)), b = JSON.parse(await W.js(`JSON.stringify(document.querySelector('wokwi-hc-sr04').getBoundingClientRect())`));
+for (let i = 0; i < pasos; i++) await W.env('Input.dispatchMouseEvent', { type: 'mouseWheel', x: (a.x + b.x + b.width) / 2, y: (a.y + b.y + b.height) / 2, deltaX: 0, deltaY: dy });
+await new Promise(r => setTimeout(r, 600));
+const r = JSON.parse(await W.js(`JSON.stringify([document.querySelector('wokwi-lcd1602').getBoundingClientRect(),document.querySelector('wokwi-hc-sr04').getBoundingClientRect(),document.querySelector('wokwi-servo').getBoundingClientRect()])`));
+console.log(r.map(r => [r.x|0, r.y|0, r.right|0, r.bottom|0]));
+await W.env('Emulation.clearDeviceMetricsOverride'); W.cerrar();

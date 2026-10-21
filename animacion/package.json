@@ -1,0 +1,21 @@
+{
+  "name": "porton-animacion",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render Arquitectura out/crudo.mp4 --codec=h264 --crf=16 --pixel-format=yuv420p && ffmpeg -loglevel error -y -i out/crudo.mp4 -c:v libx264 -preset slow -pix_fmt yuv420p -b:v 8M -minrate 6M -maxrate 10M -bufsize 16M -g 30 -keyint_min 30 -sc_threshold 0 -tune animation -movflags +faststart -an out/arquitectura.mp4",
+    "boceto": "remotion still Arquitectura out/boceto.png --frame=60"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.300",
+    "@remotion/google-fonts": "4.0.300",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.300"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "typescript": "5.9.3"
+  }
+}

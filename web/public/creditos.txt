@@ -1,0 +1,25 @@
+Portón Taller · créditos y fuentes consultadas el 2026-10-20
+
+Material de cartón: ambientCG, Cardboard004, CC0.
+https://ambientcg.com/view?id=Cardboard004
+https://docs.ambientcg.com/license/
+Material de madera: ambientCG, Wood060, CC0; representación de la base de MDF.
+https://ambientcg.com/view?id=Wood060
+Color convertido de JPG 1K a WebP 512 px para la web.
+
+Servo SG90: Innerscene, modelo original no comercial de marca, CC0-1.0.
+https://www.innerscene.com/tools/library/3d-parts/sg90-size-micro-servo-c67f0b8a
+https://www.innerscene.com/api/library/sg90-size-micro-servo-c67f0b8a/download
+
+Se buscaron modelos libres del ESP32 y HC-SR04. El HC-SR04 encontrado es STEP,
+no glTF para Three.js. Se representan con geometría simple de PCB, blindaje,
+transductores y conectores, materiales metálicos y plásticos. Sin copiar marcas.
+https://www.innerscene.com/tools/library/3d-parts/hc-sr04-ultrasonic-module-6c2aeced
+https://www.innerscene.com/blog/free-parts-library
+
+Barlow y Barlow Condensed: Jeremy Tribby, SIL Open Font License 1.1.
+https://github.com/google/fonts/tree/main/ofl/barlow
+https://github.com/google/fonts/tree/main/ofl/barlowcondensed
+Fuentes de Google Fonts alojadas localmente. Licencias en fuentes/.
+
+SVG de respaldo: copia del panel original del mismo proyecto, dashboard/index.html.

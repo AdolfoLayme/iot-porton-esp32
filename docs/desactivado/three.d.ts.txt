@@ -1,0 +1,35 @@
+// Superficie de tipos usada por esta maqueta. Evita añadir dependencias al stack.
+declare module 'three' {
+  export class Vector3 { x: number; y: number; z: number; constructor(x?: number,y?: number,z?: number); set(x: number,y: number,z: number): this; copy(v: Vector3): this; sub(v: Vector3): this; multiplyScalar(n: number): this; }
+  export class Euler {x: number;y: number;z: number;set(x: number,y: number,z: number): this;}
+  export class Color {constructor(v: string | number);set(v: string | number): this;}
+  export class Object3D {position: Vector3;rotation: Euler;scale: Vector3;visible: boolean;children: Object3D[];add(...o: Object3D[]): this;remove(o: Object3D): this;traverse(f: (o: Object3D) => void): void;lookAt(x: number,y: number,z: number): void;updateMatrixWorld(force?: boolean): void;getWorldPosition(v: Vector3): Vector3;}
+  export class Group extends Object3D {}
+  export class Scene extends Object3D {background: Color;}
+  export class BufferGeometry {dispose(): void;}
+  export class BoxGeometry extends BufferGeometry {constructor(x?: number,y?: number,z?: number);}
+  export class CylinderGeometry extends BufferGeometry {constructor(top?: number,bottom?: number,height?: number,segments?: number);}
+  export class ConeGeometry extends BufferGeometry {constructor(radius?: number,height?: number,segments?: number,heightSegments?: number,openEnded?: boolean);}
+  export class SphereGeometry extends BufferGeometry {constructor(radius?: number,width?: number,height?: number);}
+  export class PlaneGeometry extends BufferGeometry {constructor(width?: number,height?: number);}
+  export class Material {dispose(): void;}
+  export class MeshStandardMaterial extends Material {color: Color;emissive: Color;emissiveIntensity: number;constructor(options?: {color?: number | string;roughness?: number;metalness?: number;map?: Texture;normalMap?: Texture;emissive?: number | string;emissiveIntensity?: number;transparent?: boolean;opacity?: number;depthWrite?: boolean;side?: number});}
+  export class MeshBasicMaterial extends Material {color: Color;opacity: number;constructor(options?: {color?: number|string;transparent?: boolean;opacity?: number;depthWrite?: boolean;side?: number});}
+  export class Mesh<G extends BufferGeometry = BufferGeometry, M extends Material = Material> extends Object3D {geometry: G;material: M;castShadow: boolean;receiveShadow: boolean;constructor(geometry: G,material: M);}
+  export class PerspectiveCamera extends Object3D {aspect: number;constructor(fov: number,aspect: number,near: number,far: number);updateProjectionMatrix(): void;}
+  export class HemisphereLight extends Object3D {constructor(sky: number|string,ground: number|string,intensity?: number);}
+  export class DirectionalLight extends Object3D {constructor(color: number|string,intensity?: number);}
+  export class Texture {colorSpace: string;wrapS: number;wrapT: number;repeat: {set(x: number,y: number): void};dispose(): void;}
+  export class TextureLoader {load(url: string,onLoad?: (t: Texture) => void,onProgress?: undefined,onError?: () => void): Texture;}
+  export class Box3 {min: Vector3;max: Vector3;setFromObject(o: Object3D): this;getSize(v: Vector3): Vector3;getCenter(v: Vector3): Vector3;}
+  export class WebGLRenderer {domElement: HTMLCanvasElement;outputColorSpace: string;toneMapping: number;toneMappingExposure: number;info: {render: {calls: number;triangles: number}};constructor(options: {canvas: HTMLCanvasElement;antialias?: boolean;alpha?: boolean;powerPreference?: string});setPixelRatio(n: number): void;setSize(w: number,h: number,style?: boolean): void;render(scene: Scene,camera: PerspectiveCamera): void;dispose(): void;}
+  export const SRGBColorSpace: string, RepeatWrapping: number, DoubleSide: number, ACESFilmicToneMapping: number;
+}
+declare module 'three/addons/controls/OrbitControls.js' {
+  import {Vector3,PerspectiveCamera} from 'three';
+  export class OrbitControls {target: Vector3;enableDamping: boolean;enablePan: boolean;minDistance: number;maxDistance: number;minPolarAngle: number;maxPolarAngle: number;constructor(camera: PerspectiveCamera,element: HTMLElement);update(): boolean;dispose(): void;reset(): void;saveState(): void;}
+}
+declare module 'three/addons/loaders/GLTFLoader.js' {
+  import {Group} from 'three';
+  export class GLTFLoader {load(url: string,ok: (gltf: {scene: Group}) => void,progress?: undefined,error?: () => void): void;}
+}

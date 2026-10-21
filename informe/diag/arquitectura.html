@@ -1,0 +1,71 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+body{margin:0;background:#fff;font-family:Arial,Helvetica,sans-serif}
+svg{display:block}
+.caja{fill:#fff;stroke:#1f2937;stroke-width:1.6}
+.zona{fill:#f3f4f6;stroke:#9ca3af;stroke-width:1.2;stroke-dasharray:6 4}
+.t{font-size:15px;font-weight:700;fill:#111827}
+.s{font-size:12.5px;fill:#374151}
+.z{font-size:13px;font-weight:700;fill:#6b7280;letter-spacing:.06em}
+.l{fill:none;stroke:#1f2937;stroke-width:1.6;marker-start:url(#fi)}
+.l2{fill:none;stroke:#1f2937;stroke-width:1.6;marker-end:url(#f);marker-start:url(#fi)}
+.e{font-size:12px;fill:#111827;font-weight:600}
+.eb{fill:#fff}.l3{fill:none;stroke:#1f2937;stroke-width:1.6;marker-end:url(#f)}
+</style></head><body>
+<svg width="1200" height="680" viewBox="0 0 1200 680">
+<defs><marker id="f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1f2937"/></marker><marker id="fi" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M10 0L0 5L10 10z" fill="#1f2937"/></marker></defs>
+<rect class="zona" x="20" y="40" width="300" height="620" rx="10"/><text class="z" x="40" y="30">DISPOSITIVO (WOKWI)</text>
+<rect class="zona" x="380" y="40" width="430" height="620" rx="10"/><text class="z" x="400" y="30">NUBE</text>
+<rect class="zona" x="870" y="40" width="310" height="620" rx="10"/><text class="z" x="890" y="30">USUARIOS (CUALQUIER RED)</text>
+<rect class="caja" x="410" y="60" width="370" height="50" rx="8"/>
+<text class="t" x="425" y="88">Google Gemini (lenguaje natural)</text>
+<rect class="caja" x="410" y="140" width="370" height="165" rx="8"/>
+<text class="t" x="425" y="168">Supabase (sa-east-1)</text>
+<text class="s" x="425" y="192">Auth: correo y contraseña, sin registro libre</text>
+<text class="s" x="425" y="212">Base de datos: miembros e historial (RLS)</text>
+<text class="s" x="425" y="232">Edge Functions: llave-mqtt (llave de 1 h),</text>
+<text class="s" x="440" y="252">miembros (solo admin), registrar (webhook)</text>
+<text class="s" x="440" y="272">y voz (interpreta frases con Gemini)</text>
+<rect class="caja" x="410" y="345" width="370" height="190" rx="8"/>
+<text class="t" x="425" y="373">Broker MQTT flespi (mqtt.flespi.io)</text>
+<text class="s" x="425" y="397">TLS: MQTTS 8883 (ESP32) y WSS 443 (web)</text>
+<text class="s" x="425" y="417">Una llave (token) por cliente con lista ACL:</text>
+<text class="s" x="440" y="437">usuario: publica solo en porton/cmd/&lt;su id&gt;</text>
+<text class="s" x="440" y="457">ESP32: único que publica estado y evento</text>
+<text class="s" x="440" y="477">casa 3D: lee estado, publica solo entorno</text>
+<text class="s" x="425" y="497">Mensajes retenidos y última voluntad (LWT)</text>
+<rect class="caja" x="45" y="345" width="250" height="175" rx="8"/>
+<text class="t" x="60" y="373">ESP32 DevKit C v4</text>
+<text class="s" x="60" y="397">Núcleo 1: bucle físico con millis()</text>
+<text class="s" x="75" y="417">reglas, sensor, servo, LED, LCD</text>
+<text class="s" x="60" y="437">Núcleo 0: tarea de red (FreeRTOS)</text>
+<text class="s" x="75" y="457">WiFi Wokwi-GUEST, NTP, TLS, MQTT</text>
+<text class="s" x="60" y="477">Colas entre ambas tareas</text>
+<rect class="caja" x="45" y="560" width="115" height="80" rx="8"/>
+<text class="t" x="60" y="588">Entradas</text>
+<text class="s" x="60" y="612">3 pulsadores</text>
+<text class="s" x="60" y="632">HC-SR04</text>
+<rect class="caja" x="180" y="560" width="115" height="80" rx="8"/>
+<text class="t" x="195" y="588">Salidas</text>
+<text class="s" x="195" y="612">Servo SG90</text>
+<text class="s" x="195" y="632">LED, LCD I2C</text>
+<rect class="caja" x="895" y="140" width="260" height="250" rx="8"/>
+<text class="t" x="910" y="168">App de control (PWA)</text>
+<text class="s" x="910" y="192">porton-iot.vercel.app</text>
+<text class="s" x="910" y="212">Admin, Usuario A, Usuario B</text>
+<text class="s" x="910" y="232">Abrir, Parar, Cerrar</text>
+<text class="s" x="910" y="252">Apertura parcial y voz</text>
+<text class="s" x="910" y="272">Historial y miembros</text>
+<text class="s" x="910" y="292">Celular (datos o WiFi) o PC</text>
+<rect class="caja" x="895" y="450" width="260" height="120" rx="8"/>
+<text class="t" x="910" y="478">Casa 3D (Three.js)</text>
+<text class="s" x="910" y="502">porton-iot.vercel.app/casa.html</text>
+<text class="s" x="910" y="522">Refleja el portón en vivo; avisa</text>
+<text class="s" x="910" y="542">si el carro corta el haz</text>
+<path class="l2" d="M297 440H408"/><rect class="eb" x="306" y="412" width="94" height="18"/><text class="e" x="310" y="426">MQTTS 8883</text>
+<path class="l2" d="M102 560V522"/><path class="l2" d="M237 560V522"/>
+<path class="l2" d="M595 140V112"/>
+<path class="l3" d="M595 345V309"/><text class="e" x="605" y="331">webhook porton/evento</text>
+<path class="l2" d="M893 220H782"/><rect class="eb" x="790" y="192" width="98" height="18"/><text class="e" x="794" y="206">HTTPS (login)</text>
+<path class="l2" d="M893 370H782"/><rect class="eb" x="800" y="342" width="76" height="18"/><text class="e" x="806" y="356">WSS 443</text>
+<path class="l2" d="M893 500H782"/><rect class="eb" x="786" y="472" width="106" height="18"/><text class="e" x="790" y="486">estado / entorno</text>
+</svg></body></html>

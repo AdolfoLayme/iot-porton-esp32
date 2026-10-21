@@ -1,0 +1,22 @@
+import { abrirPestana } from './wk-lib.mjs';
+import { writeFileSync } from 'node:fs';
+const dormir = ms => new Promise(r => setTimeout(r, ms));
+const cm = process.argv[2], url = process.argv[3], salida = process.argv[4];
+const W = await abrirPestana('550B50E73C9B8F8947EDD8DAF0A01603');
+await W.env('Page.bringToFront');
+const hay = await W.js(`!![...document.querySelectorAll('input[type=range]')].find(i=>i.offsetParent&&i.max==='400')`);
+if (!hay) { const r = JSON.parse(await W.js(`JSON.stringify(document.querySelector('wokwi-hc-sr04').getBoundingClientRect())`)); await W.clic(r.x + r.width / 2, r.y + r.height / 2); await dormir(500); }
+await W.js(`(()=>{const i=[...document.querySelectorAll('input[type=range]')].find(i=>i.offsetParent&&i.max==='400');Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(i,'${cm}');i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new Event('change',{bubbles:true}));})()`);
+W.cerrar();
+if (!url) process.exit(0);
+const v = await (await fetch('http://127.0.0.1:9223/json/version')).json();
+const ws = new WebSocket(v.webSocketDebuggerUrl); await new Promise(r => ws.onopen = r);
+let n = 0; const env = (m, p = {}, s) => new Promise(r => { const id = ++n; ws.addEventListener('message', function f(e) { const d = JSON.parse(e.data); if (d.id === id) { ws.removeEventListener('message', f); r(d.result ?? d.error); } }); ws.send(JSON.stringify({ id, method: m, params: p, ...(s ? { sessionId: s } : {}) })); });
+const { browserContextId } = await env('Target.createBrowserContext');
+const { targetId } = await env('Target.createTarget', { url: 'about:blank', browserContextId });
+const { sessionId: s } = await env('Target.attachToTarget', { targetId, flatten: true });
+await env('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false }, s);
+await env('Page.navigate', { url }, s); await dormir(16000);
+console.log((await env('Runtime.evaluate', { expression: "['estado','chip-online'].map(i=>document.getElementById(i).textContent).join(' | ')", returnByValue: true }, s)).result.value);
+const r = await env('Page.captureScreenshot', { format: 'png' }, s); writeFileSync(salida, Buffer.from(r.data, 'base64'));
+await env('Target.disposeBrowserContext', { browserContextId }); ws.close();

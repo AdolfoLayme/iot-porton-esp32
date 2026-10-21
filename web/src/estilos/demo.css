@@ -1,0 +1,63 @@
+/* Expo: estilo animejs.com aplicado al portón. Carbón cálido, titular grande, medidor de color, etiquetas mono. */
+/* DESACTIVADO 2026-10-20: diseño "cuaderno de taller" (papel/cobre) reemplazado a pedido de Adolfo. */
+html{scroll-behavior:smooth}
+.expo{background:var(--fondo);color:var(--tinta);margin:0}
+.expo-cabecera{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px clamp(20px,4vw,64px);background:color-mix(in srgb,var(--fondo) 88%,transparent);backdrop-filter:blur(10px)}
+.marca{color:var(--tinta);font-weight:700;font-size:1.35rem;text-decoration:none;letter-spacing:-.03em}.marca span{font-weight:400;color:var(--suave);margin-left:6px}
+.expo-nav{display:flex;align-items:center;gap:clamp(12px,2vw,28px);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em}
+.expo-nav a{color:var(--suave);text-decoration:none;min-height:44px;display:flex;align-items:center}.expo-nav a:hover{color:var(--tinta)}
+.expo-nav button{min-height:38px;padding:6px 14px;font-size:.75rem;border-radius:6px}
+
+.heroe{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center;gap:clamp(24px,4vw,64px);padding:clamp(28px,5vw,72px) clamp(20px,4vw,64px) clamp(40px,6vw,96px);max-width:1500px;margin:0 auto}
+.heroe h1{font-size:clamp(3rem,6.2vw,5.6rem);line-height:.98;letter-spacing:-.045em;font-weight:700;max-width:11ch}
+.heroe-bajada{font-size:clamp(1.05rem,1.4vw,1.3rem);line-height:1.45;color:var(--suave);max-width:40ch;margin-top:24px}
+.estado-expo{margin-top:28px;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--acento)}
+.mediciones{display:flex;gap:clamp(16px,3vw,40px);margin-top:20px;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--suave)}
+.mediciones span{display:flex;flex-direction:column;gap:6px}.mediciones strong{color:var(--tinta);font-family:'Sora Variable',sans-serif;font-size:1.6rem;letter-spacing:-.03em;text-transform:none;font-weight:600}
+.heroe-acciones{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.boton-linea{display:inline-flex;align-items:center;min-height:52px;padding:0 20px;border:1px solid var(--linea);border-radius:8px;color:var(--tinta);text-decoration:none;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;background:var(--panel);transition:border-color .2s,background .2s}
+.boton-linea:hover{border-color:var(--acento);background:var(--panel2)}.boton-linea:first-child{background:var(--acento);color:var(--sobre-acento);border-color:var(--acento)}
+
+.medidor{width:100%;max-width:640px;justify-self:center;aspect-ratio:1;overflow:visible}
+.m-segmento{fill:none;stroke-width:6;stroke-linecap:round;filter:drop-shadow(0 0 6px currentColor)}
+.m-marca{stroke:var(--linea);stroke-width:2;transform-box:fill-box;transform-origin:center}.m-activa{stroke:var(--suave);stroke-width:2.5}
+.m-activa.m-encendida{stroke:var(--acento)}
+.m-guia{fill:none;stroke:var(--linea);stroke-width:1.5;stroke-dasharray:3 6}
+.m-barrido{fill:var(--acento);opacity:.12}
+.m-rotulo{stroke:none;fill:var(--suave);font:600 11px 'JetBrains Mono Variable',monospace;letter-spacing:.06em}
+.m-baliza{fill:#ffcc2a}.m-bisagra{fill:var(--acento)}.m-bisagra-centro{fill:var(--fondo)}
+
+.expo-principal{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:clamp(20px,3vw,48px);padding:clamp(24px,4vw,56px) clamp(20px,4vw,64px);max-width:1500px;margin:0 auto;border-top:1px solid var(--linea)}
+.maqueta h2,.recorrido h2,.casos h2{font-size:clamp(1.8rem,3vw,2.6rem);letter-spacing:-.04em;font-weight:700}
+#escena{width:100%;height:clamp(320px,42vw,520px);display:block;touch-action:none;border-radius:14px;margin-top:20px;background:var(--panel)}
+#respaldo{padding:20px}#respaldo svg{width:100%;max-height:340px}#respaldo p{color:var(--peligro)}
+.aviso-posicion{font-size:.8rem;color:var(--suave);margin-top:12px}
+.leyenda{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-wrap:wrap;gap:10px 24px;font-size:.72rem;color:var(--suave);text-transform:uppercase;letter-spacing:.06em}
+.leyenda li{display:flex;align-items:center;gap:8px}.leyenda i{width:10px;height:10px;border-radius:50%;box-shadow:0 0 8px currentColor}
+.celular-zona{display:flex;flex-direction:column;align-items:center;justify-content:center}
+.marco-celular{width:340px;height:690px;border:8px solid var(--panel2);border-radius:38px;box-shadow:var(--sombra);overflow:hidden;background:var(--fondo)}
+.marco-celular iframe{border:0;width:100%;height:100%;display:block}.celular-zona>p{font-size:.72rem;margin-top:16px;color:var(--suave);text-transform:uppercase;letter-spacing:.08em}
+
+.recorrido{padding:clamp(28px,4vw,56px) clamp(20px,4vw,64px);border-top:1px solid var(--linea);max-width:1500px;margin:0 auto}
+.recorrido-titulo{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}.recorrido-titulo span{font-size:.78rem;color:var(--suave)}
+.viaje{width:100%;height:auto;margin-top:24px;overflow:visible}.viaje-linea{fill:none;stroke:var(--linea);stroke-width:2;stroke-dasharray:6 8}
+#viaje-punto{fill:var(--acento);filter:drop-shadow(0 0 8px currentColor)}
+#camino{display:grid;grid-template-columns:repeat(5,1fr);list-style:none;margin:8px 0 0;padding:0;gap:16px;text-align:center}
+#camino li{display:flex;flex-direction:column;gap:4px;padding-top:10px;border-top:2px solid var(--linea);transition:border-color .25s,color .25s}
+#camino li[data-activo=true]{border-color:var(--acento);color:var(--acento)}#camino li span{font-size:.72rem;color:var(--suave)}
+
+.casos{padding:clamp(28px,4vw,56px) clamp(20px,4vw,64px);border-top:1px solid var(--linea);max-width:1500px;margin:0 auto}
+.casos-contenido{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px}
+.casos details{background:var(--panel);border:1px solid var(--linea);border-radius:14px;padding:18px 20px}
+summary{font-weight:600;cursor:pointer;min-height:44px;display:flex;align-items:center}
+details p{font-size:.9rem;color:var(--suave);margin:10px 0 14px;line-height:1.55}details button{font-size:.85rem}details a{font-size:.85rem;display:inline-flex;align-items:center;min-height:44px}
+.expo-pie{padding:20px clamp(20px,4vw,64px);border-top:1px solid var(--linea);display:flex;justify-content:space-between;font-size:.72rem;color:var(--suave);text-transform:uppercase;letter-spacing:.06em}
+.expo-pie a{min-height:44px;display:flex;align-items:center}
+
+@media(max-width:980px){
+  .heroe{grid-template-columns:1fr}.medidor{max-width:420px;order:-1}
+  .expo-principal{grid-template-columns:1fr}.marco-celular{width:min(100%,360px);height:700px}
+  .casos-contenido{grid-template-columns:1fr}#camino{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}#camino li span{display:none}
+  .expo-nav a:not(:last-of-type){display:none}
+}
+#maqueta,#recorrido,#casos{scroll-margin-top:84px}

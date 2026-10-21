@@ -1,0 +1,69 @@
+Créditos de la escena "casa real con portón automático"
+=======================================================
+
+Todos los recursos son de uso libre (CC0 o CC-BY) y se descargaron el 20-oct-2026.
+Los archivos originales quedan en web/public/casa/fuentes/ y web/public/casa/hdri/.
+
+1) Fachada modular de la casa
+   Archivo: fuentes/modular_urban_apartments_facade/ (modular_urban_apartments_facade_1k.gltf)
+   Obra: "Modular Urban Apartments Facade"
+   Autor: James Ray (Poly Haven)
+   Fuente: https://polyhaven.com/a/modular_urban_apartments_facade
+   Licencia: CC0 1.0 Universal (dominio público)
+   Uso: módulos de 3 x 3 m combinados en herramientas/armar-casa.py para armar la vivienda.
+
+2) Farola de la vereda
+   Archivo: fuentes/street_lamp_01/ (street_lamp_01_1k.gltf)
+   Obra: "Street Lamp 01"
+   Autor: Poly Haven
+   Fuente: https://polyhaven.com/a/street_lamp_01
+   Licencia: CC0 1.0 Universal (dominio público)
+   Uso: malla completa, a escala real, en la vereda.
+
+3) Material PBR del portón de hierro
+   Archivo: fuentes/large_iron_gate/ (large_iron_gate_1k.gltf)
+   Obra: "Large Iron Gate"
+   Autor: Poly Haven
+   Fuente: https://polyhaven.com/a/large_iron_gate
+   Licencia: CC0 1.0 Universal (dominio público)
+   Uso: solo se toma su material de hierro (color, rugosidad, metal, normales) para la hoja
+        de barrotes modelada en Blender. La malla original se descarta.
+
+4) Cielo de día (HDRI)
+   Archivo: hdri/dia.hdr (1K)
+   Obra: "Kloofendal 48d Partly Cloudy (Pure Sky)"
+   Autor: Greg Zaal (Poly Haven)
+   Fuente: https://polyhaven.com/a/kloofendal_48d_partly_cloudy_puresky
+   Licencia: CC0 1.0 Universal (dominio público)
+
+5) Cielo de noche (HDRI)
+   Archivo: hdri/noche.hdr (1K)
+   Obra: "Moonless Golf"
+   Autor: Greg Zaal (Poly Haven)
+   Fuente: https://polyhaven.com/a/moonless_golf
+   Licencia: CC0 1.0 Universal (dominio público)
+
+6) Carro (Range Rover)
+   Archivo: fuentes/poly-pizza/range-rover-ivofficial.glb
+   Obra: "Range Rover"
+   Autor: IvOfficial (Poly Pizza)
+   Fuente: https://poly.pizza/m/8zk4o6nALW
+   Licencia: CC-BY 3.0 (https://creativecommons.org/licenses/by/3.0/)
+   Cambios: escalado de 6,5 m a 4,3 m de largo, decimado y unido en una sola malla.
+
+Recursos descargados que NO se usaron en el GLB final:
+- fuentes/jacaranda_tree/ (Poly Haven, CC0): 3,8 millones de triángulos, no entra en el
+  presupuesto de 8 MB.
+- fuentes/kenney-carkit/, fuentes/kenney-suburban/ (Kenney, CC0): estilo low-poly,
+  descartados por la preferencia de realismo del enunciado.
+- fuentes/rollershutter_door/ (Poly Haven, CC0): no se usó; la cochera es un hueco real
+  con interior modelado.
+
+Agregados el 2026-10-20 (Claude), todos CC0:
+- Pasto: ambientCG Grass001 — https://ambientcg.com/view?id=Grass001
+- Ladrillo: Poly Haven brick_wall_02 — https://polyhaven.com/a/brick_wall_02
+- Concreto: Poly Haven concrete_floor_02 — https://polyhaven.com/a/concrete_floor_02
+- Hojas (setos y macetas): Poly Haven forest_leaves_03 — https://polyhaven.com/a/forest_leaves_03
+- Foco con jaula (baliza roja/verde): Poly Haven industrial_wall_lamp — https://polyhaven.com/a/industrial_wall_lamp
+- Hojas de los setos: ambientCG LeafSet024 — https://ambientcg.com/view?id=LeafSet024
+- Plantas en maceta: Poly Haven potted_plant_01 y potted_plant_02 — https://polyhaven.com/a/potted_plant_01

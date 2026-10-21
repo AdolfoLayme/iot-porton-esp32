@@ -1,0 +1,14 @@
+import { abrirPestana } from './wk-lib.mjs';
+import { writeFileSync } from 'node:fs';
+const W = await abrirPestana('550B50E73C9B8F8947EDD8DAF0A01603');
+await W.env('Emulation.setDeviceMetricsOverride', { width: 1500, height: 860, deviceScaleFactor: 1, mobile: false });
+await W.env('Page.bringToFront'); await new Promise(r => setTimeout(r, 1000));
+const [x0, y0, dx, dy] = process.argv.slice(2).map(Number);
+await W.env('Input.dispatchMouseEvent', { type: 'mousePressed', x: x0, y: y0, button: 'left', clickCount: 1 });
+for (let k = 1; k <= 10; k++) await W.env('Input.dispatchMouseEvent', { type: 'mouseMoved', x: x0 + dx * k / 10, y: y0 + dy * k / 10, button: 'left', buttons: 1 });
+await W.env('Input.dispatchMouseEvent', { type: 'mouseReleased', x: x0 + dx, y: y0 + dy, button: 'left', clickCount: 1 });
+await new Promise(r => setTimeout(r, 500));
+const r = JSON.parse(await W.js(`JSON.stringify([document.querySelector('wokwi-lcd1602').getBoundingClientRect(),document.querySelector('wokwi-hc-sr04').getBoundingClientRect()])`));
+console.log(r.map(r => [r.x|0, r.y|0, r.right|0, r.bottom|0]));
+const s = await W.env('Page.captureScreenshot', { format: 'png' }); writeFileSync('wkz.png', Buffer.from(s.data, 'base64'));
+await W.env('Emulation.clearDeviceMetricsOverride'); W.cerrar();

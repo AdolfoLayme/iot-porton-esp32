@@ -1,0 +1,14 @@
+  ✓ sin sesión: llave negada (403) 1
+  ✓ Usuario A recibe llave (vence en 60 min) 2
+  ✓ A publica en su propio tema 3
+  ✓ A NO puede mandar órdenes como B 4
+  ✓ A NO puede hacerse pasar por el portón 5
+  ✓ el portón recibió solo la orden legítima, identificando a A 6
+  ✓ token inventado: rechazado por el broker 7
+  ✓ admin desactiva a B: 2 llave(s) revocada(s) 8
+  ✓ B desactivado: llave negada 9
+  ✓ la llave vieja de B ya no conecta 10
+  ✓ un miembro común no gestiona miembros 11
+  ✓ B reactivado: vuelve a recibir llave 12
+
+12/12 pruebas de seguridad OK

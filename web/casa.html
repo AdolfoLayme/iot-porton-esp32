@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#141712">
+  <link rel="icon" href="/icono.svg">
+  <title>Casa con portón automático · Portón Taller</title>
+  <style>
+    html, body { height: 100%; }
+    body.casa { margin: 0; overflow: hidden; background: #10130f; }
+    #escena { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+    .solo-lectores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .velo { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 28px; text-align: center;
+      background: #10130fee; color: #f5f0e6; font-size: 1rem; line-height: 1.5; }
+    .barra { position: fixed; top: 0; left: 0; right: 0; z-index: 5; display: flex; gap: 18px;
+      align-items: flex-start; justify-content: space-between; padding: 18px 24px 42px; color: #f5f0e6;
+      background: linear-gradient(#10130fd9, #10130f00); pointer-events: none; }
+    .barra > * { pointer-events: auto; }
+    .marca { color: #f5f0e6; font-weight: 700; font-size: 1.35rem; letter-spacing: -.025em; text-decoration: none; }
+    .marca span { color: #c8c4b6; font-weight: 400; margin-left: 7px; }
+    .rotulo #estado { margin-top: 8px; font-size: 1.0625rem; font-weight: 600; }
+    .rotulo #detalle { margin-top: 4px; max-width: 46ch; font-size: .8125rem; color: #cfcaba; line-height: 1.4; }
+    .acciones { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .pastilla { min-height: 44px; padding: 8px 16px; font-size: .875rem; color: #f5f0e6;
+      background: #f5f0e61f; border: 1px solid #ffffff59; backdrop-filter: blur(8px); }
+    .pastilla:hover:not(:disabled) { background: #f5f0e638; border-color: #fff; color: #fff; }
+    .pastilla.acento { background: #a44324; border-color: #a44324; color: #fff9f1; }
+    .pastilla.acento:hover:not(:disabled) { background: #b74f2c; border-color: #b74f2c; }
+    .pastilla:disabled { opacity: .5; }
+    .chips { position: fixed; left: 24px; right: 24px; bottom: 18px; z-index: 5; display: flex; gap: 8px;
+      align-items: center; flex-wrap: wrap; pointer-events: none; }
+    .chips span, .chips a { pointer-events: auto; display: inline-flex; align-items: baseline; gap: 6px;
+      padding: 7px 13px; border-radius: 999px; font-size: .8125rem; color: #dcd7c9;
+      background: #10130fc9; border: 1px solid #ffffff26; backdrop-filter: blur(8px); text-decoration: none; }
+    .chips strong { color: #fffdf8; font-size: .9375rem; font-variant-numeric: tabular-nums; }
+    .chips a { margin-left: auto; color: #f0c9b5; }
+    .chips a:hover { border-color: #f0c9b5; }
+    @media (max-width: 640px) {
+      .barra { padding: 12px 14px 30px; gap: 12px; }
+      .marca { font-size: 1.15rem; }
+      .rotulo #estado { font-size: .9375rem; }
+      .rotulo #detalle { display: none; }
+      .acciones { flex-direction: column; align-items: stretch; }
+      .pastilla { min-height: 42px; padding: 7px 12px; font-size: .8125rem; }
+      .chips { left: 12px; right: 12px; bottom: 12px; gap: 6px; }
+      .chips span, .chips a { font-size: .6875rem; padding: 6px 10px; }
+      .chips strong { font-size: .8125rem; }
+    }
+  </style>
+</head>
+<body class="casa">
+  <h1 class="solo-lectores">Casa real con portón automático</h1>
+  <canvas id="escena" tabindex="0" aria-label="Escena 3D de la casa con portón automático. Esperando telemetría."></canvas>
+  <div id="cargando" class="velo" role="status">Cargando la casa y el portón…</div>
+  <header class="barra">
+    <div class="rotulo">
+      <a class="marca" href="/">Portón<span>Taller</span></a>
+      <p id="estado" role="status">Conectando con el portón…</p>
+      <p id="detalle"></p>
+    </div>
+    <div class="acciones">
+      <button id="clima" class="pastilla" type="button">Noche</button>
+      <button id="carro-puerta" class="pastilla" type="button" disabled>Parar en el portón</button>
+      <button id="carro" class="pastilla acento" type="button" disabled>Llegar en carro</button>
+    </div>
+  </header>
+  <div class="chips" role="group" aria-label="Telemetría del portón">
+    <span>En línea <strong id="chip-online">No</strong></span>
+    <span>Apertura <strong id="chip-pos">— %</strong></span>
+    <span>Latencia <strong id="chip-rtt">— ms</strong></span>
+    <a href="/casa/creditos.txt">Materiales y créditos</a>
+  </div>
+  <script type="module" src="/src/casa/inicio.ts"></script>
+</body>
+</html>

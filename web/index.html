@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es" data-tema="claro">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#a44324"><meta name="description" content="Control del portón ESP32 y telemetría en vivo.">
+  <link rel="manifest" href="/manifest.webmanifest"><link rel="icon" href="/icono.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icono-192.png"><title>Portón Taller · Control</title>
+</head>
+<body>
+  <div class="franja" id="franja" hidden>Modo desarrollo: sin seguridad</div>
+  <div class="app">
+    <header class="cabecera"><a class="marca" href="/">Portón<span>Taller</span></a>
+      <button id="tema" class="discreto" aria-label="Activar tema oscuro">Oscuro</button></header>
+    <main>
+      <section id="entrada" aria-labelledby="bienvenida">
+        <div class="entrada-dibujo" aria-hidden="true"><svg viewBox="0 0 320 170"><path d="M20 145h280M65 145V25h10v120m170 0V25h10v120M75 35h170v100H75m0-80h170M160 35v100M75 115h170"/></svg></div>
+        <h1 id="bienvenida">El taller,<br>en tus manos.</h1>
+        <form id="entrar-seguro" hidden>
+          <label for="correo">Correo</label><input id="correo" type="email" autocomplete="username" required>
+          <label for="clave">Contraseña</label>
+          <div class="campo-clave"><input id="clave" type="password" autocomplete="current-password" required>
+            <button type="button" id="ver-clave" class="ver-clave" aria-label="Mostrar contraseña" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/><path class="tachado" d="M4 4l16 16"/></svg></button></div>
+          <p id="error-entrada" class="error-entrada" role="alert"></p>
+          <button class="principal" type="submit" id="boton-entrar">Entrar al control <span aria-hidden="true">↗</span></button>
+        </form>
+        <form id="entrar" hidden><label for="usuario">Tu usuario de prueba</label>
+          <select id="usuario"><option value="usuario-a">Usuario A</option><option value="usuario-b">Usuario B</option><option value="admin">Admin</option></select>
+          <button class="principal" type="submit">Entrar al control <span aria-hidden="true">↗</span></button>
+        </form>
+        <p class="nota" id="nota-entrada"></p>
+      </section>
+      <div id="sesion" hidden>
+        <div class="sesion-linea"><span id="identidad">Usuario A</span><button id="salir" class="texto-boton">Salir</button></div>
+        <section id="control" aria-labelledby="titulo-estado">
+          <div class="col-vista">
+          <div class="telemetria" aria-label="Conectividad"><span id="broker">Broker: conectando</span><span id="online">Portón: sin conexión</span><span id="llave">Llave: no aplica</span></div>
+          <div class="estado-porton" data-tono="apagado">
+            <h1 id="titulo-estado" aria-live="polite">Portón sin conexión</h1>
+            <div class="escena-plana">
+              <svg id="plano" viewBox="0 0 400 250" role="img" aria-label="Vista superior del portón, esperando telemetría">
+                <defs><pattern id="rayas" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="14" height="14" class="raya-a"/><rect width="7" height="14" class="raya-b"/></pattern></defs>
+                <rect class="calle" x="0" y="210" width="400" height="40"/>
+                <line class="carril" x1="0" y1="232" x2="400" y2="232"/>
+                <rect class="muro" x="0" y="200" width="120" height="16" rx="3"/>
+                <rect class="muro" x="320" y="200" width="80" height="16" rx="3"/>
+                <rect class="sensor" x="321" y="188" width="10" height="15" rx="2"/><text class="rotulo" x="326" y="181" text-anchor="middle">HC-SR04</text>
+                <path id="haz" d="M321 195.5 L132 185 L132 206 Z"/>
+                <g id="obst" opacity="0"><circle cx="220" cy="195" r="13"/><text x="220" y="200" text-anchor="middle">!</text></g>
+                <path class="arco" d="M320 210 A200 200 0 0 0 120 10"/>
+                <g id="hoja"><rect x="120" y="203" width="200" height="14" rx="3"/><circle id="baliza" cx="312" cy="210" r="5"/>
+                  <path class="barrotes" d="M150 205v10M180 205v10M210 205v10M240 205v10M270 205v10M300 205v10"/></g>
+                <circle id="halo" cx="120" cy="210" r="16"/><circle class="bisagra" cx="120" cy="210" r="8"/><circle class="bisagra-centro" cx="120" cy="210" r="3"/>
+              </svg>
+            </div>
+            <div class="lectura"><span id="porcentaje">—</span><span>% de apertura</span></div>
+            <div class="barra" aria-hidden="true"><div id="barra"></div></div>
+            <p id="detalle" aria-live="polite"></p>
+          </div>
+          </div>
+          <div class="col-mando">
+          <div class="acciones" aria-label="Órdenes del portón">
+            <button data-orden="abrir" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 14 7-7 7 7M12 7v13"/></svg>Abrir</button>
+            <button data-orden="parar" class="parar" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12"/></svg>Parar</button>
+            <button data-orden="cerrar" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 10 7 7 7-7M12 17V4"/></svg>Cerrar</button>
+          </div>
+          <form id="parcial" class="parcial"><label for="apertura">Apertura parcial <output id="elegido" for="apertura">50 %</output></label>
+            <input id="apertura" type="range" min="0" max="100" value="50" step="1" disabled>
+            <button id="aplicar" type="submit" disabled>Ir a 50 %</button></form>
+          <div class="instrumentos"><span>Sensor <strong id="distancia">— cm</strong></span><span>Latencia <strong id="latencia">— ms</strong></span></div>
+          <svg id="spark" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><polyline id="spark-linea" vector-effect="non-scaling-stroke"/></svg>
+          <div class="voz"><button id="microfono" class="mic" aria-label="Hablar" title="Hablar" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><p id="voz-ayuda" class="nota"></p>
+            <p id="transcripcion" aria-live="polite"></p><button id="confirmar-voz" class="principal" hidden></button><button id="cancelar-voz" class="texto-boton" hidden>Cancelar</button></div>
+          <p id="mensaje" role="status" aria-live="polite"></p>
+          </div>
+        </section>
+        <section id="historial" hidden aria-labelledby="titulo-historial"><h1 id="titulo-historial">Historial</h1><p class="nota" id="nota-historial"></p><ol id="eventos"><li class="vacio">Todavía no llegaron eventos del portón.</li></ol></section>
+        <section id="miembros" hidden aria-labelledby="titulo-miembros"><div class="seccion-cabeza"><h1 id="titulo-miembros">Miembros</h1><button id="abrir-nuevo" class="principal chico" hidden><span aria-hidden="true">+</span> Agregar</button></div>
+          <p id="nota-miembros" class="nota"></p>
+          <ul id="lista-miembros" class="lista-miembros"></ul>
+          <form id="nuevo-miembro" class="nuevo-miembro" hidden><h2>Nueva persona</h2>
+            <label for="nuevo-nombre">Nombre</label><input id="nuevo-nombre" maxlength="40" required>
+            <label for="nuevo-correo">Correo</label><input id="nuevo-correo" type="email" required>
+            <label for="nuevo-rol">Rol</label><select id="nuevo-rol"><option value="miembro">Miembro</option><option value="admin">Administrador</option></select>
+            <div class="fila-botones"><button type="button" id="cancelar-nuevo" class="discreto">Cancelar</button><button class="principal" type="submit">Agregar</button></div></form>
+          <p id="clave-nueva" class="clave-nueva" role="status" aria-live="polite"></p></section>
+      </div>
+    </main>
+    <nav id="navegacion" aria-label="Secciones" hidden><button data-vista="control" aria-current="page">Control</button><button data-vista="historial">Historial</button><button data-vista="miembros">Miembros</button></nav>
+    <footer><span>ESP32 · IoT</span><button id="instalar" hidden>Instalar app</button></footer>
+  </div>
+  <script type="module" src="/src/app/inicio.ts"></script>
+</body></html>

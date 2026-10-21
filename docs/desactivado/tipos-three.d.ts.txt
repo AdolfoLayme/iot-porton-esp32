@@ -1,0 +1,104 @@
+// Ampliaciones de la superficie de tipos de `three` que necesita la escena de la casa.
+// Este archivo es un script (sin import/export) para poder declarar módulos ambientales
+// nuevos y fusionar miembros con las clases ya declaradas en `src/escena/three.d.ts`.
+declare module 'three' {
+  export interface Object3D {
+    name: string;
+    getObjectByName(nombre: string): Object3D | undefined;
+  }
+  export interface Material {
+    name: string;
+  }
+  export interface Texture {
+    mapping: number;
+  }
+  export interface Vector3 {
+    clone(): Vector3;
+    distanceTo(v: Vector3): number;
+    addScaledVector(v: Vector3, n: number): this;
+    normalize(): this;
+    length(): number;
+  }
+  export interface Scene {
+    environment: Texture | null;
+    fog: Fog | null;
+  }
+  export interface WebGLRenderer {
+    shadowMap: { enabled: boolean; type: number };
+  }
+  export interface PerspectiveCamera {
+    fov: number;
+  }
+  export interface HemisphereLight {
+    intensity: number;
+  }
+  export interface AmbientLight {
+    intensity: number;
+  }
+  export interface DirectionalLight {
+    intensity: number;
+    castShadow: boolean;
+    shadow: {
+      mapSize: { set(x: number, y: number): void };
+      camera: { near: number; far: number; left: number; right: number; top: number; bottom: number };
+      bias: number;
+      normalBias: number;
+    };
+  }
+  export interface MeshStandardMaterial {
+    envMapIntensity: number;
+  }
+  export class Fog {
+    color: Color;
+    constructor(color: number | string, near?: number, far?: number);
+  }
+  export class AmbientLight extends Object3D {
+    intensity: number;
+    constructor(color: number | string, intensity?: number);
+  }
+  export class PointLight extends Object3D {
+    color: Color;
+    intensity: number;
+    distance: number;
+    decay: number;
+    constructor(color: number | string, intensity?: number, distance?: number, decay?: number);
+  }
+  export const EquirectangularReflectionMapping: number, PCFSoftShadowMap: number;
+}
+
+declare module 'three/addons/controls/OrbitControls.js' {
+  import { PerspectiveCamera, Vector3 } from 'three';
+  export class OrbitControls {
+    target: Vector3;
+    enabled: boolean;
+    enableDamping: boolean;
+    dampingFactor: number;
+    enablePan: boolean;
+    autoRotate: boolean;
+    autoRotateSpeed: number;
+    minDistance: number;
+    maxDistance: number;
+    minPolarAngle: number;
+    maxPolarAngle: number;
+    constructor(camera: PerspectiveCamera, element: HTMLElement);
+    addEventListener(tipo: 'start' | 'end' | 'change', f: () => void): void;
+    update(): boolean;
+    dispose(): void;
+    reset(): void;
+    saveState(): void;
+  }
+}
+
+declare module 'three/addons/loaders/RGBELoader.js' {
+  import { Texture } from 'three';
+  export class RGBELoader {
+    load(url: string, ok: (t: Texture) => void, progreso?: undefined, error?: (e: unknown) => void): void;
+  }
+}
+
+declare module 'three/addons/loaders/HDRLoader.js' {
+  import { Texture } from 'three';
+  export class HDRLoader {
+    load(url: string, ok: (t: Texture) => void, progreso?: undefined, error?: (e: unknown) => void): void;
+  }
+}
