@@ -49,7 +49,6 @@ Flujo simplificado:
 - **`wokwi/`**: Firmware del microcontrolador ESP32 (`sketch.ino`), lógica de reglas y concurrencia (`porton_reglas.h`), gestión de periféricos (`fisica.h`), comunicación FreeRTOS/MQTT (`red_firmware.h`), certificado TLS (`flespi_ca.h`), plantilla de configuración (`config.ejemplo.h`) y esquema de circuito (`diagram.json`).
 - **`web/`**: Aplicación web PWA desarrollada con Vite y TypeScript. Incluye el panel de control móvil, comandos de voz en español, interfaz administrativa y visor 3D interactivo con Three.js (`demo.html` para maqueta y `casa.html` para simulación residencial).
 - **`supabase/`**: Definiciones de base de datos con PostgreSQL/RLS (`migrations/`) y Edge Functions en Deno (`functions/`) para emisión de llaves ACL (`llave-mqtt`), administración de miembros (`miembros`), registro de historial (`registrar`) y procesamiento de voz (`voz`).
-- **`docs/`**: Documentación técnica del proyecto, especificaciones de arquitectura (`docs/superpowers/specs/2026-10-20-porton-iot-design.md`), investigación de reconocimiento de voz y la [Guía de Armado y Calibración de la Maqueta](docs/guia-maqueta.md).
 - **`pruebas/`**: Suite de pruebas unitarias en C++ para validar las reglas de concurrencia y seguridad del portón en el PC.
 - **`herramientas/`**: Scripts auxiliares en Node.js para aprovisionamiento de tokens de dispositivo (`token-dispositivo.mjs`), pruebas de seguridad (`probar-seguridad.mjs`) y siembra de usuarios (`sembrar.mjs`).
 
